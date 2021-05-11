@@ -1,6 +1,6 @@
 use std::fmt;
 
-use {Paint, Style};
+use crate::{Paint, Style};
 
 /// An enum representing an ANSI color code.
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Copy, Clone)]

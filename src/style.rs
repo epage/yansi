@@ -2,7 +2,7 @@ use std::hash::{Hash, Hasher};
 use std::fmt::{self, Display};
 use std::ops::BitOr;
 
-use {Paint, Color};
+use crate::{Paint, Color};
 
 #[derive(Default, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Copy, Clone)]
 pub struct Property(u8);
