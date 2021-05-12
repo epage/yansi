@@ -2,7 +2,7 @@ use std::hash::{Hash, Hasher};
 use std::fmt::{self, Display};
 use std::ops::BitOr;
 
-use {Paint, Color};
+use crate::{Paint, Color};
 
 #[derive(Default, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Copy, Clone)]
 pub struct Property(u8);
@@ -182,7 +182,7 @@ macro_rules! checker_for {
 }
 
 #[inline]
-fn write_spliced<T: Display>(c: &mut bool, f: &mut fmt::Write, t: T) -> fmt::Result {
+fn write_spliced<T: Display>(c: &mut bool, f: &mut dyn fmt::Write, t: T) -> fmt::Result {
     if *c {
         write!(f, ";{}", t)
     } else {
@@ -409,7 +409,7 @@ impl Style {
     ///     }
     /// }
     /// ```
-    pub fn fmt_prefix(&self, f: &mut fmt::Write) -> fmt::Result {
+    pub fn fmt_prefix(&self, f: &mut dyn fmt::Write) -> fmt::Result {
         // A user may just want a code-free string when no styles are applied.
         if self.is_plain() {
             return Ok(());
@@ -471,7 +471,7 @@ impl Style {
     ///     }
     /// }
     /// ```
-    pub fn fmt_suffix(&self, f: &mut fmt::Write) -> fmt::Result {
+    pub fn fmt_suffix(&self, f: &mut dyn fmt::Write) -> fmt::Result {
         if self.is_plain() {
             return Ok(());
         }

@@ -1,7 +1,7 @@
 use std::fmt;
 
-use style::{Style, Property};
-use color::Color;
+use crate::style::{Style, Property};
+use crate::color::Color;
 
 /// A structure encapsulating an item and styling.
 ///
@@ -342,7 +342,7 @@ impl<T> Paint<T> {
 macro_rules! impl_fmt_trait {
     ($trait:ident, $fmt:expr) => (
         impl<T: fmt::$trait> fmt::$trait for Paint<T> {
-            fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+            fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
                 if Paint::is_enabled() && self.style.wrap {
                     let mut prefix = String::new();
                     prefix.push_str("\x1B[0m");
@@ -459,6 +459,6 @@ impl Paint<()> {
     /// ```
     #[inline]
     pub fn enable_windows_ansi() -> bool {
-        ::windows::enable_ansi_colors()
+        crate::windows::enable_ansi_colors()
     }
 }
